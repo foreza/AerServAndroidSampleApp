@@ -1,5 +1,4 @@
-package com.aerserv.sample;
-
+package com.aerserv.unifiedsample;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,7 +7,6 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.aerserv.sdk.AerServSdk;
 import com.aerserv.sdk.AerServBanner;
 import com.aerserv.sdk.AerServConfig;
 import com.aerserv.sdk.AerServEvent;
@@ -16,7 +14,6 @@ import com.aerserv.sdk.AerServEventListener;
 import com.aerserv.sdk.AerServInterstitial;
 import com.aerserv.sdk.AerServTransactionInformation;
 import com.aerserv.sdk.AerServVirtualCurrency;
-import com.aerserv.sdk.utils.UrlBuilder;
 import com.amazon.device.ads.AdError;
 import com.amazon.device.ads.AdRegistration;
 import com.amazon.device.ads.DTBAdCallback;
@@ -24,12 +21,14 @@ import com.amazon.device.ads.DTBAdLoader;
 import com.amazon.device.ads.DTBAdRequest;
 import com.amazon.device.ads.DTBAdResponse;
 import com.amazon.device.ads.DTBAdSize;
+import com.inmobi.sdk.InMobiSdk;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class MainActivity extends Activity {
-    private static final String LOG_TAG = "AerServSampleApp";
+    private static final String LOG_TAG = "UnifiedSampleApp";
 
     private AerServBanner banner;
     private AerServInterstitial interstitial;
@@ -44,7 +43,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         TextView version = (TextView) findViewById(R.id.sdkVersion);
-        version.setText("v" + UrlBuilder.VERSION);
+        version.setText("v" + InMobiSdk.getVersion());
 
         // To pre-initialize mediation adapters, uncomment the following line and change to your site ID
         // AerServSdk.init(this, "101190");
@@ -141,7 +140,7 @@ public class MainActivity extends Activity {
                 public void onFailure(AdError adError) {
                     Log.e("A9", "Failed to get the interstitial ad from Amazon: " + adError.getMessage());
                     final AerServConfig config = new AerServConfig(MainActivity.this, getPlc())
-                        .setA9AdResponses(null)
+                        .setAPSAdResponses(null)
                         .setEventListener(interstitialListener)
                         .setPreload(preloadSwitch.isChecked());
                     interstitial = new AerServInterstitial(config);
@@ -158,7 +157,7 @@ public class MainActivity extends Activity {
                     Log.i("A9", "Successfully get " + dtbAdResponse.getDTBAds().size() + " interstitial ad from Amazon");
 
                     final AerServConfig config = new AerServConfig(MainActivity.this, getPlc())
-                            .setA9AdResponses(responses)
+                            .setAPSAdResponses(responses)
                             .setEventListener(interstitialListener)
                             .setPreload(preloadSwitch.isChecked());
                     interstitial = new AerServInterstitial(config);
@@ -308,7 +307,7 @@ public class MainActivity extends Activity {
                 public void onFailure(AdError adError) {
                     Log.e("A9", "Failed to get banner ad from Amazon: " + adError.getMessage());
                     final AerServConfig config = new AerServConfig(MainActivity.this, getPlc())
-                        .setA9AdResponses(null)
+                        .setAPSAdResponses(null)
                         .setEventListener(bannerListener)
                         .setPreload(preloadSwitch.isChecked())
                         .setRefreshInterval(60);
@@ -327,7 +326,7 @@ public class MainActivity extends Activity {
                         + " banner ad from Amazon");
 
                     final AerServConfig config = new AerServConfig(MainActivity.this, getPlc())
-                        .setA9AdResponses(responses)
+                        .setAPSAdResponses(responses)
                         .setEventListener(bannerListener)
                         .setPreload(preloadSwitch.isChecked())
                         .setRefreshInterval(60);

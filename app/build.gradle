@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
 
     defaultConfig {
-        applicationId "com.aerserv.sample"
+        applicationId "com.aerserv.unifiedsample"
         minSdkVersion 17
         targetSdkVersion 28
         versionCode 1
@@ -23,9 +23,7 @@ android {
         }
     }
     sourceSets {
-        main{
-            jniLibs.srcDirs = ['libs']
-        }
+
     }
 }
 
@@ -39,28 +37,45 @@ repositories {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+
+
+    implementation(name: 'InMobiSDK', ext:'aar')
+
 
     implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.google.android.gms:play-services-ads:15.0.1'
-    implementation 'com.google.android.gms:play-services-basement:15.0.0'
-    implementation 'com.google.android.gms:play-services-location:15.0.1'
+
+
+    implementation 'com.google.android.gms:play-services-ads:17.2.0'
+    implementation 'com.google.android.gms:play-services-basement:16.1.0'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.android.support:multidex:1.0.3'
+
+    implementation (name: 'APS/DTBAndroidSDK-7.3', ext:'aar')
+
+
+
+    // TODO: Clean up and plug in additional mediations
+
+
+//    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+
     // Mediation AAR
-    implementation(name: 'AppnextAndroidSDKAds', ext:'aar')
-    implementation(name: 'AppnextAndroidSDKCore', ext:'aar')
-    implementation(name: 'mm-ad-sdk', ext: 'aar')
-    implementation(name: 'unity-ads', ext: 'aar')
-    implementation(name: 'TremorVideo', ext: 'aar')
-    implementation(name: 'AudienceNetwork', ext:'aar')
-    implementation(name: 'mytarget-sdk-4.7.2', ext: 'aar')
-    implementation(name: 'DTBAndroidSDK-7.3', ext:'aar')
+//    implementation(name: 'AppnextAndroidSDKAds', ext:'aar')
+//    implementation(name: 'AppnextAndroidSDKCore', ext:'aar')
+//    implementation(name: 'mm-ad-sdk', ext: 'aar')
+//    implementation(name: 'unity-ads', ext: 'aar')
+//    implementation(name: 'TremorVideo', ext: 'aar')
+//    implementation(name: 'AudienceNetwork', ext:'aar')
+//    implementation(name: 'mytarget-sdk-4.7.2', ext: 'aar')
+//    implementation(name: 'DTBAndroidSDK-7.3', ext:'aar')
 
     // Dependencies for MoPub
-    implementation 'com.android.support:support-v4:28.0.0'
-    implementation 'com.android.support:recyclerview-v7:28.0.0'
+//    implementation 'com.android.support:support-v4:28.0.0'
+//    implementation 'com.android.support:recyclerview-v7:28.0.0'
 
-    implementation 'com.squareup.picasso:picasso:2.5.2'
 
 
 }

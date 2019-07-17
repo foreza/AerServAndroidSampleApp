@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.aerserv.sample"
+    package="com.aerserv.unifiedsample"
     android:versionCode="22"
     android:versionName="3.1.8">
 
@@ -20,17 +20,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-    <!-- Millennial Media permissions -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission-sdk-23 android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="22"/>
-    <uses-permission android:name="android.permission.NFC"/>
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-
-    <!-- RhythmOne -->
-    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:name="android.support.multidex.MultiDexApplication"
@@ -42,7 +31,7 @@
         android:networkSecurityConfig="@xml/network_security_config">
 
         <activity
-            android:name="com.aerserv.sample.MainActivity"
+            android:name="com.aerserv.unifiedsample.MainActivity"
             android:windowSoftInputMode="stateHidden"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:label="@string/app_name">
@@ -53,124 +42,14 @@
             </intent-filter>
         </activity>
 
-        <!-- AdColony adapter -->
-        <activity android:name="com.adcolony.sdk.AdColonyInterstitialActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:hardwareAccelerated="true"/>
-        <activity android:name="com.adcolony.sdk.AdColonyAdViewActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:hardwareAccelerated="true"/>
 
-        <!-- AdMob adapter -->
-        <activity android:name="com.google.android.gms.ads.AdActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+        <!--TODO: Replace with actual admob id, plugging in sample admob ID-->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713"/>
 
-        <!-- AerServ -->
-        <activity
-            android:name="com.aerserv.sdk.view.ASVastInterstitialActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
-        <activity android:name="com.aerserv.sdk.view.ASWebviewInterstitialActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
-        <activity android:name="com.aerserv.sdk.view.ASVpaidInterstitalActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
-        <activity
-            android:name="com.aerserv.sdk.view.AerServFullScreenAdActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+        <!-- TODO: Plug in the mediation we need -->
 
-        <!-- AppLovin adapter -->
-        <activity android:name="com.applovin.adview.AppLovinInterstitialActivity"
-            android:configChanges="orientation|screenSize"/>
-        <activity android:name="com.applovin.adview.AppLovinConfirmationActivity"
-            android:configChanges="orientation|screenSize"/>
-
-        <!-- Chartboost adapter -->
-        <activity android:name="com.chartboost.sdk.CBImpressionActivity"
-            android:excludeFromRecents="true"
-            android:hardwareAccelerated="true"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
-
-        <!-- Facebook adapter -->
-        <activity android:name="com.facebook.ads.AudienceNetworkActivity"
-            android:hardwareAccelerated="true"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
-
-        <!-- Flurry adapter -->
-        <activity
-            android:name="com.flurry.android.FlurryFullscreenTakeoverActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize">
-        </activity>
-
-        <!-- MoPub adapter -->
-        <activity android:name="com.mopub.mobileads.MoPubActivity" android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize"/>
-        <activity android:name="com.mopub.mobileads.MraidActivity" android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize"/>
-        <activity android:name="com.mopub.common.MoPubBrowser" android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize"/>
-        <activity android:name="com.mopub.mobileads.MraidVideoPlayerActivity" android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize"/>
-
-        <!-- RhythmOne -->
-        <activity
-            android:name="com.rhythmone.ad.sdk.RhythmOneAdActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-            android:label="RhythmOneAdActivity"
-            android:hardwareAccelerated="true"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
-
-        <!-- Tremor adapter -->
-        <activity android:name="com.tremorvideo.sdk.android.videoad.Playvideo"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:hardwareAccelerated="false" android:exported="false">
-            <intent-filter>
-                <action android:name="com.tremorvideo.sdk.android.videoad.Playvideo" />
-                <category android:name="android.intent.category.EMBED" />
-            </intent-filter>
-        </activity>
-
-        <!-- Vungle adapter -->
-        <activity android:name="com.vungle.publisher.VideoFullScreenAdActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
-
-        <activity android:name="com.vungle.publisher.MraidFullScreenAdActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
-
-
-        <!-- Millennial Media -->
-        <activity
-            android:name="com.millennialmedia.internal.MMActivity"
-            android:configChanges="locale|layoutDirection"
-            android:label="@string/mmadsdk_app_name"
-            android:theme="@style/Theme.MMTransparent" />
-        <activity
-            android:name="com.millennialmedia.internal.MMIntentWrapperActivity"
-            android:configChanges="locale|layoutDirection"
-            android:label="sdk" />
-
-        <service
-            android:name="com.millennialmedia.internal.task.handshake.HandshakeRequestService"
-            android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-
-        <service
-            android:name="com.millennialmedia.internal.task.reporting.PlacementReportingService"
-            android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-
-        <provider
-            android:name="com.millennialmedia.internal.utils.MediaContentProvider"
-            android:authorities="${applicationId}.MediaContentProvider"
-            android:grantUriPermissions="true"
-            android:exported="false" />
-
-        <!--InMobi adapter-->
-        <activity
-            android:name="com.inmobi.rendering.InMobiAdActivity"
-            android:configChanges="keyboardHidden|orientation|keyboard|smallestScreenSize|screenSize|screenLayout"
-            android:hardwareAccelerated="true"
-            android:resizeableActivity="false"
-            android:theme="@android:style/Theme.NoTitleBar"
-            tools:ignore="UnusedAttribute" />
 
     </application>
 
