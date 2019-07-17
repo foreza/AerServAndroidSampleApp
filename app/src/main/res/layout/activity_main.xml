@@ -1,0 +1,147 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:paddingTop="@dimen/activity_vertical_margin"
+  tools:context="com.aerservsdk.sampleapp.MainActivity">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_above="@+id/banner"
+      android:layout_alignParentStart="true"
+      android:layout_alignParentTop="true"
+      android:gravity="center_horizontal"
+      android:orientation="vertical">
+
+        <LinearLayout
+          android:layout_width="200dp"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
+            <TextView
+              android:id="@+id/sdkVersion"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="top"/>
+
+            <EditText
+              android:id="@+id/plcET"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:hint="@string/enter_custom_plc"
+              android:inputType="phone"/>
+        </LinearLayout>
+
+        <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+            <Button
+              android:id="@+id/loadInterstitial"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignEnd="@+id/guideline"
+              android:layout_alignParentStart="true"
+              android:layout_alignParentTop="true"
+              android:layout_toLeftOf="@+id/guideline"
+              android:onClick="loadInterstitial"
+              android:text="@string/load_interstitial"/>
+
+            <Button
+              android:id="@+id/showInterstitial"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentEnd="true"
+              android:layout_alignParentTop="true"
+              android:onClick="showInterstitial"
+              android:text="Show Interstitial"
+              android:visibility="invisible"/>
+        </RelativeLayout>
+        <!--<Button-->
+        <!--android:id="@+id/preloadInterstitial"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:onClick="preloadInterstitial"-->
+        <!--android:text="Preload Interstitial" />-->
+
+        <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+            <Button
+              android:id="@+id/playBanner"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignEnd="@+id/loadBanner"
+              android:layout_alignParentTop="true"
+              android:onClick="playBanner"
+              android:text="Play Banner"
+              android:visibility="invisible"/>
+            <Button
+              android:id="@+id/pauseBanner"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentStart="true"
+              android:layout_alignParentTop="true"
+              android:onClick="pauseBanner"
+              android:text="Pause Banner"
+              android:visibility="invisible"/>
+            <Button
+              android:id="@+id/loadBanner"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentStart="true"
+              android:layout_alignParentTop="true"
+              android:onClick="loadBanner"
+              android:text="Load Banner"/>
+            <Button
+              android:id="@+id/showBanner"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentEnd="true"
+              android:layout_alignParentTop="true"
+              android:onClick="showBanner"
+              android:text="Show Banner"
+              android:visibility="invisible"/>
+            <Button
+              android:id="@+id/killBanner"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentEnd="true"
+              android:layout_alignParentTop="true"
+              android:text="Kill Banner"
+              android:onClick="killBanner"
+              android:visibility="invisible"/>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+            <Switch
+              android:id="@+id/a9Switch"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="11dp"
+              android:layout_alignParentStart="true"
+              android:layout_alignParentTop="true"
+              android:text="Use A9"/>
+            <Switch
+              android:id="@+id/preloadSwitch"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentStart="true"
+              android:layout_below="@+id/a9Switch"
+              android:text="Preload"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <com.aerserv.sdk.AerServBanner
+      android:id="@+id/banner"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:layout_alignParentBottom="true"
+      android:layout_centerHorizontal="true"
+      android:gravity="center_horizontal"/>
+
+</RelativeLayout>
