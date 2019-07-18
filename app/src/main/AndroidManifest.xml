@@ -12,14 +12,14 @@
         android:xlargeScreens="true"
         android:anyDensity="true" />
 
-    <!-- Required -->
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <!-- Optional.  Excluding these can negatively affect fill rate. -->
+    <!-- Required Permissions -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <!-- Optional Permissions -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name="android.support.multidex.MultiDexApplication"
@@ -49,6 +49,34 @@
             android:value="ca-app-pub-3940256099942544~3347511713"/>
 
         <!-- TODO: Plug in the mediation we need -->
+
+
+
+        <!--<activity android:name="com.vungle.warren.ui.VungleActivity"-->
+            <!--android:configChanges="density|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"-->
+        <!--android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />-->
+
+
+        <!--<activity android:name="com.vungle.warren.ui.VungleFlexViewActivity"-->
+            <!--android:configChanges="density|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"-->
+            <!--android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>-->
+
+
+
+        <activity
+            tools:replace="android:theme"
+        android:name="com.vungle.warren.ui.VungleActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
+        android:launchMode="singleTop"
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+
+        <activity
+        android:name="com.vungle.warren.ui.VungleFlexViewActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
+        android:hardwareAccelerated="true"
+        android:launchMode="singleTop"
+        android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
 
 
     </application>

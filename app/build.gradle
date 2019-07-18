@@ -38,21 +38,36 @@ repositories {
 
 dependencies {
 
-
-
     implementation(name: 'InMobiSDK', ext:'aar')
 
+    implementation 'com.android.support:appcompat-v7:28.0.0'
 
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-
-
+    // Note: this is required for InMobi interstitials, and not in doc
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation 'com.google.android.gms:play-services-ads:17.2.0'
     implementation 'com.google.android.gms:play-services-basement:16.1.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.android.support:multidex:1.0.3'
 
+    // Not an SDK dependency. TODO: Strip out APS adapter dependency / make a different activity
     implementation (name: 'APS/DTBAndroidSDK-7.3', ext:'aar')
+
+    // Vungle from jcenter
+//    implementation 'com.vungle:publisher-sdk-android:6.3.24'
+
+
+//
+//    // Required Third-party Dependencies
+
+
+    implementation fileTree(dir: 'libs/Vungle', include: ['*.jar'])
+
+    // Support library
+     compile 'com.android.support:support-v4:27.1.1'
+
+
+
 
 
 
