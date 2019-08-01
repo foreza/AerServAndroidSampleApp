@@ -7,6 +7,9 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.adcolony.sdk.AdColony;
+import com.adcolony.sdk.AdColonyAppOptions;
 import com.aerserv.sdk.AerServBanner;
 import com.aerserv.sdk.AerServConfig;
 import com.aerserv.sdk.AerServEvent;
@@ -47,6 +50,7 @@ public class MainActivity extends Activity {
 
         // To pre-initialize mediation adapters, uncomment the following line and change to your site ID
         // AerServSdk.init(this, "101190");
+
     }
     
     @Override
