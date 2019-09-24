@@ -3,10 +3,17 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
 
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
     defaultConfig {
         applicationId "com.aerserv.unifiedsample"
         minSdkVersion 17
-        targetSdkVersion 28
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         dexOptions {
@@ -38,36 +45,29 @@ repositories {
 
 dependencies {
 
-    implementation(name: 'InMobiSDK', ext:'aar')
-
-    implementation 'com.android.support:appcompat-v7:28.0.0'                            // This is included because we are using the AppCompat activity
-    implementation 'com.android.support:support-v4:27.1.1'                              // TODO: Do we need this support library for anything? MoPub does require this as well.
-
+    implementation(name: 'unified-AS-IM-sdk-8.1.2-mediation-debug', ext:'aar')          // InMobi AAR
+    implementation 'com.squareup.picasso:picasso:2.71828'                               // InMobi dependency
 
     implementation 'com.android.support:recyclerview-v7:28.0.0'                         // Note: this is required for InMobi interstitials, and not in doc
-    implementation 'com.google.android.gms:play-services-ads-identifier:16.0.0'         // This allows us to get the AAID (Android advertising ID) - TODO: v 17 doesn't work
+    implementation 'com.google.android.gms:play-services-ads-identifier:16.0.0'         // This allows us to get the AAID (Android advertising ID)
     implementation 'com.google.android.gms:play-services-basement:16.1.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
-    implementation 'com.squareup.picasso:picasso:2.71828'
 
 
-    implementation 'com.android.support:multidex:1.0.3'                                 // Allows us to handle use case when we exceed 64k method limit by making multiple dex files
-
-
-    implementation (name: 'APS/DTBAndroidSDK-7.3', ext:'aar')                           // APS SDK mediation TODO: Strip out APS adapter dependency / make a different activity
-
-    implementation 'com.vungle:publisher-sdk-android:6.3.24'                            // (Version 6.3.24) Vungle SDK mediation // Note - including the files provided in SDK download will cause run-time issues unless conflicting library is removed
-
+    implementation 'com.vungle:publisher-sdk-android:6.3.24'                            // (Version 6.3.24) Vungle SDK mediation
     implementation (name: 'AdColony/adcolony', ext:'jar')                               // (Version 3.3.10) AdColony SDK mediation
-
-    implementation(name: 'Facebook/AudienceNetwork', ext:'aar')                         // (Version 5.3.1) Facebook SDK mediation
-
-    implementation 'com.google.android.gms:play-services-ads:17.2.1'                    // (Version 18.1.1) AdMob SDK mediation 
+    implementation(name: 'Facebook/AudienceNetwork-5.5', ext:'aar')                         // (Version 5.3.1) Facebook SDK mediation
+    implementation 'com.google.android.gms:play-services-ads:17.2.1'                    // (Version 17.2.1) AdMob SDK mediation
 
 
+    implementation 'com.android.support:multidex:1.0.3'                                 // Allows us to handle use case when we exceed 64k method limit
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:support-v4:27.1.1'
 
+    implementation (name: 'APS/DTBAndroidSDK-7.3', ext:'aar')                           // APS SDK mediation (not required)
 
     // TODO: Clean up and plug in additional mediations
+
 
 
 //    implementation fileTree(dir: 'libs', include: ['*.jar'])

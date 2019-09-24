@@ -137,11 +137,19 @@
     </LinearLayout>
 
     <com.aerserv.sdk.AerServBanner
-      android:id="@+id/banner"
-      android:layout_width="match_parent"
-      android:layout_height="50dp"
-      android:layout_alignParentBottom="true"
-      android:layout_centerHorizontal="true"
-      android:gravity="center_horizontal"/>
+        android:id="@+id/banner"
+        android:layout_width="300dp"
+        android:layout_height="250dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"/>
+
+    <!--<com.aerserv.sdk.AerServBanner-->
+      <!--android:id="@+id/banner"-->
+      <!--android:layout_width="match_parent"-->
+      <!--android:layout_height="50dp"-->
+      <!--android:layout_alignParentBottom="true"-->
+      <!--android:layout_centerHorizontal="true"-->
+      <!--android:gravity="center_horizontal"/>-->
 
 </RelativeLayout>

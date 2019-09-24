@@ -1,5 +1,6 @@
 package com.aerserv.unifiedsample;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,13 +9,12 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.adcolony.sdk.AdColony;
-import com.adcolony.sdk.AdColonyAppOptions;
 import com.aerserv.sdk.AerServBanner;
 import com.aerserv.sdk.AerServConfig;
 import com.aerserv.sdk.AerServEvent;
 import com.aerserv.sdk.AerServEventListener;
 import com.aerserv.sdk.AerServInterstitial;
+import com.aerserv.sdk.AerServSdk;
 import com.aerserv.sdk.AerServTransactionInformation;
 import com.aerserv.sdk.AerServVirtualCurrency;
 import com.amazon.device.ads.AdError;
@@ -24,6 +24,9 @@ import com.amazon.device.ads.DTBAdLoader;
 import com.amazon.device.ads.DTBAdRequest;
 import com.amazon.device.ads.DTBAdResponse;
 import com.amazon.device.ads.DTBAdSize;
+import com.facebook.ads.AdSettings;
+import com.facebook.ads.AudienceNetworkAds;
+import com.inmobi.commons.utils.Logger;
 import com.inmobi.sdk.InMobiSdk;
 
 import java.util.ArrayList;
@@ -35,6 +38,7 @@ public class MainActivity extends Activity {
 
     private AerServBanner banner;
     private AerServInterstitial interstitial;
+
 
     private static final String APP_KEY = "a9_onboarding_app_id";
     private static final String SLOT_320x50 = "54fb2d08-c222-40b1-8bbe-4879322dc04b";
@@ -48,8 +52,18 @@ public class MainActivity extends Activity {
         TextView version = (TextView) findViewById(R.id.sdkVersion);
         version.setText("v" + InMobiSdk.getVersion());
 
+        InMobiSdk.setLogLevel(InMobiSdk.LogLevel.DEBUG);
+
+
         // To pre-initialize mediation adapters, uncomment the following line and change to your site ID
-        // AerServSdk.init(this, "101190");
+//         AerServSdk.init(this, "1022106"); // Android UAT Mediation test
+//        AerServSdk.init(this, "1021434"); // MSFT Solitaire test
+
+
+        startActivityForResult(new Intent(android.provider.Settings.A), 0);
+
+
+
 
     }
     
@@ -174,6 +188,7 @@ public class MainActivity extends Activity {
         } else {
             final AerServConfig config = new AerServConfig(this, getPlc())
                     .setEventListener(interstitialListener)
+                    .setDebug(true)
                     .setPreload(preloadSwitch.isChecked());
             interstitial = new AerServInterstitial(config);
 

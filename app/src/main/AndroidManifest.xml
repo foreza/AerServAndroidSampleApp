@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.aerserv.unifiedsample"
     android:versionCode="22"
-    android:versionName="3.1.8">
+    android:versionName="8.2.1">
 
     <supports-screens android:resizeable="true"
         android:smallScreens="true"
@@ -27,8 +27,18 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
+
         android:usesCleartextTraffic="true"
         android:networkSecurityConfig="@xml/network_security_config">
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <!--TODO: Replace with your actual admob id, below is sample admob ID from documentation -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713"/>
 
         <activity
             android:name="com.aerserv.unifiedsample.MainActivity"
@@ -43,12 +53,25 @@
         </activity>
 
 
-        <!--TODO: Replace with actual admob id, plugging in sample admob ID-->
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713"/>
+        <!-- AdColony Activities -->
+        <activity android:name="com.adcolony.sdk.AdColonyInterstitialActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:hardwareAccelerated="true"/>
 
-        <!-- TODO: Plug in the mediation we need -->
+
+        <!-- Vungle Activities -->
+        <activity
+        android:name="com.vungle.warren.ui.VungleActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
+        android:launchMode="singleTop"
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+
+        <activity
+        android:name="com.vungle.warren.ui.VungleFlexViewActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
+        android:hardwareAccelerated="true"
+        android:launchMode="singleTop"
+        android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
 
     </application>
