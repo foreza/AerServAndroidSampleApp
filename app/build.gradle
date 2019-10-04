@@ -66,6 +66,10 @@ dependencies {
 
     implementation (name: 'APS/DTBAndroidSDK-7.3', ext:'aar')                           // APS SDK mediation (not required)
 
+    implementation('com.mopub:mopub-sdk:5.5.0@aar') {
+        transitive = true
+    }
+
     // TODO: Clean up and plug in additional mediations
 
 

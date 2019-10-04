@@ -54,16 +54,7 @@ public class MainActivity extends Activity {
 
         InMobiSdk.setLogLevel(InMobiSdk.LogLevel.DEBUG);
 
-
-        // To pre-initialize mediation adapters, uncomment the following line and change to your site ID
-//         AerServSdk.init(this, "1022106"); // Android UAT Mediation test
-//        AerServSdk.init(this, "1021434"); // MSFT Solitaire test
-
-
-        startActivityForResult(new Intent(android.provider.Settings.A), 0);
-
-
-
+        AerServSdk.init(this, "1022221"); // SE / Publisher test app
 
     }
     
