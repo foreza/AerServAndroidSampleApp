@@ -1,6 +1,5 @@
 package com.aerserv.unifiedsample;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,9 +23,7 @@ import com.amazon.device.ads.DTBAdLoader;
 import com.amazon.device.ads.DTBAdRequest;
 import com.amazon.device.ads.DTBAdResponse;
 import com.amazon.device.ads.DTBAdSize;
-import com.facebook.ads.AdSettings;
-import com.facebook.ads.AudienceNetworkAds;
-import com.inmobi.commons.utils.Logger;
+
 import com.inmobi.sdk.InMobiSdk;
 
 import java.util.ArrayList;
@@ -54,7 +51,11 @@ public class MainActivity extends Activity {
 
         InMobiSdk.setLogLevel(InMobiSdk.LogLevel.DEBUG);
 
-        AerServSdk.init(this, "1022221"); // SE / Publisher test app
+//        AerServSdk.init(this, "1022221"); // SE / Publisher test app
+        AerServSdk.init(this, "1021434"); // MSFT Android test app ID
+//        AerServSdk.init(this, "1021434"); // MSFT Android test app ID
+
+
 
     }
     
@@ -88,6 +89,10 @@ public class MainActivity extends Activity {
                                 findViewById(R.id.showInterstitial).setVisibility(View.VISIBLE);
                                 break;
                             case AD_FAILED:
+
+                                Log.d(LOG_TAG, "PROFILE: AD_FAILED");
+
+
                                 if (args.size() > 1) {
                                     Integer adFailedCode =
                                         (Integer) args.get(AerServEventListener.AD_FAILED_CODE);
@@ -115,12 +120,21 @@ public class MainActivity extends Activity {
                                     + "\n buyerPrice=" + vc.getBuyerPrice();
                                 break;
                             case LOAD_TRANSACTION:
+
+                                Log.d(LOG_TAG, "PROFILE: LOAD_TRANSACTION");
+
+
                                 ti = (AerServTransactionInformation) args.get(0);
                                 msg = "Load Transaction Information PLC has:"
                                     + "\n buyerName=" + ti.getBuyerName()
                                     + "\n buyerPrice=" + ti.getBuyerPrice();
                                 break;
                             case SHOW_TRANSACTION:
+
+
+                                Log.d(LOG_TAG, "PROFILE: SHOW_TRANSACTION");
+
+
                                 ti = (AerServTransactionInformation) args.get(0);
                                 msg = "Show Transaction Information PLC has:"
                                     + "\n buyerName=" + ti.getBuyerName()
@@ -179,7 +193,7 @@ public class MainActivity extends Activity {
         } else {
             final AerServConfig config = new AerServConfig(this, getPlc())
                     .setEventListener(interstitialListener)
-                    .setDebug(true)
+//                    .setDebug(true)
                     .setPreload(preloadSwitch.isChecked());
             interstitial = new AerServInterstitial(config);
 
@@ -193,6 +207,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.showInterstitial).setVisibility(View.INVISIBLE);
         if (interstitial != null) {
             interstitial.show();
+
         }
     }
 
