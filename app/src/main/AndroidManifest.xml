@@ -50,10 +50,10 @@
         </activity>
 
 
-        <!--&lt;!&ndash; AdColony Activities &ndash;&gt;-->
-        <!--<activity android:name="com.adcolony.sdk.AdColonyInterstitialActivity"-->
-            <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
-            <!--android:hardwareAccelerated="true"/>-->
+        <!-- AdColony Activities -->
+        <activity android:name="com.adcolony.sdk.AdColonyInterstitialActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:hardwareAccelerated="true"/>
 
 
         <!--&lt;!&ndash; Vungle Activities &ndash;&gt;-->

@@ -118,38 +118,41 @@
         <RelativeLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content">
+
             <Switch
-              android:id="@+id/a9Switch"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginTop="11dp"
-              android:layout_alignParentStart="true"
-              android:layout_alignParentTop="true"
-              android:text="Use A9"/>
+                android:id="@+id/mrecSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="11dp"
+                android:text="Use MREC Slot" />
             <Switch
               android:id="@+id/preloadSwitch"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_alignParentStart="true"
-              android:layout_below="@+id/a9Switch"
+              android:layout_below="@+id/mrecSwitch"
               android:text="Preload"/>
         </RelativeLayout>
     </LinearLayout>
 
     <com.aerserv.sdk.AerServBanner
         android:id="@+id/banner"
-        android:layout_width="300dp"
-        android:layout_height="250dp"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:gravity="center_horizontal"/>
+        android:gravity="center_horizontal"
+        android:minWidth="250dp"
+        android:minHeight="50dp" />
 
-    <!--<com.aerserv.sdk.AerServBanner-->
-      <!--android:id="@+id/banner"-->
-      <!--android:layout_width="match_parent"-->
-      <!--android:layout_height="50dp"-->
-      <!--android:layout_alignParentBottom="true"-->
-      <!--android:layout_centerHorizontal="true"-->
-      <!--android:gravity="center_horizontal"/>-->
+    <com.aerserv.sdk.AerServBanner
+      android:id="@+id/mrec"
+      android:layout_width="300dp"
+      android:layout_height="250dp"
+      android:layout_alignParentBottom="true"
+      android:layout_centerHorizontal="true"
+      android:gravity="center_horizontal"/>
 
 </RelativeLayout>

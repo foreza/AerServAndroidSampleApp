@@ -8,6 +8,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+
 import com.aerserv.sdk.AerServBanner;
 import com.aerserv.sdk.AerServConfig;
 import com.aerserv.sdk.AerServEvent;
@@ -16,30 +18,20 @@ import com.aerserv.sdk.AerServInterstitial;
 import com.aerserv.sdk.AerServSdk;
 import com.aerserv.sdk.AerServTransactionInformation;
 import com.aerserv.sdk.AerServVirtualCurrency;
-import com.amazon.device.ads.AdError;
-import com.amazon.device.ads.AdRegistration;
-import com.amazon.device.ads.DTBAdCallback;
-import com.amazon.device.ads.DTBAdLoader;
-import com.amazon.device.ads.DTBAdRequest;
-import com.amazon.device.ads.DTBAdResponse;
-import com.amazon.device.ads.DTBAdSize;
+
 
 import com.inmobi.sdk.InMobiSdk;
+import com.inmobi.sdk.SdkInitializationListener;
 
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.List;
 
 
 public class MainActivity extends Activity {
-    private static final String LOG_TAG = "UnifiedSampleApp";
+    private static final String LOG_TAG = "9XX Mediation Sample";
 
     private AerServBanner banner;
     private AerServInterstitial interstitial;
-
-
-    private static final String APP_KEY = "a9_onboarding_app_id";
-    private static final String SLOT_320x50 = "54fb2d08-c222-40b1-8bbe-4879322dc04b";
-    private static final String SLOT_INTERSTITIAL = "4e918ac0-5c68-4fe1-8d26-4e76e8f74831";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +43,18 @@ public class MainActivity extends Activity {
 
         InMobiSdk.setLogLevel(InMobiSdk.LogLevel.DEBUG);
 
-//        AerServSdk.init(this, "1022221"); // SE / Publisher test app
-        AerServSdk.init(this, "1021434"); // MSFT Android test app ID
-//        AerServSdk.init(this, "1021434"); // MSFT Android test app ID
+        // 1022221: SE/Publisher test app id
+        // 1021436: MSFT Android test app id
 
 
 
+
+        AerServSdk.init(this, "1021436", new SdkInitializationListener() {
+            @Override
+            public void onInitializationComplete(@Nullable Error error) {
+                // Handle this!
+            }
+        });
     }
     
     @Override
@@ -70,7 +68,7 @@ public class MainActivity extends Activity {
     public void loadInterstitial(View view) {
 
         final Switch preloadSwitch = (Switch) findViewById(R.id.preloadSwitch);
-        Switch a9Switch = (Switch) findViewById(R.id.a9Switch);
+        Switch a9Switch = (Switch) findViewById(R.id.mrecSwitch);
 
         findViewById(R.id.showInterstitial).setVisibility(View.INVISIBLE);
 
@@ -150,47 +148,7 @@ public class MainActivity extends Activity {
             }
         };
 
-        if (a9Switch.isChecked()) {
-            AdRegistration.getInstance(APP_KEY, this);
-            AdRegistration.enableLogging(true);
-            AdRegistration.enableTesting(true);
-            AdRegistration.useGeoLocation(true);
 
-            DTBAdLoader adLoader = new DTBAdRequest();
-            adLoader.setSizes(new DTBAdSize.DTBInterstitialAdSize(SLOT_INTERSTITIAL));
-            adLoader.loadAd(new DTBAdCallback() {
-                @Override
-                public void onFailure(AdError adError) {
-                    Log.e("A9", "Failed to get the interstitial ad from Amazon: " + adError.getMessage());
-                    final AerServConfig config = new AerServConfig(MainActivity.this, getPlc())
-                        .setAPSAdResponses(null)
-                        .setEventListener(interstitialListener)
-                        .setPreload(preloadSwitch.isChecked());
-                    interstitial = new AerServInterstitial(config);
-                    if(!preloadSwitch.isChecked()) {
-                        interstitial.show();
-                    }
-                }
-
-                @Override
-                public void onSuccess(DTBAdResponse dtbAdResponse) {
-                    List<DTBAdResponse> responses = new ArrayList<DTBAdResponse>();
-                    responses.add(dtbAdResponse);
-
-                    Log.i("A9", "Successfully get " + dtbAdResponse.getDTBAds().size() + " interstitial ad from Amazon");
-
-                    final AerServConfig config = new AerServConfig(MainActivity.this, getPlc())
-                            .setAPSAdResponses(responses)
-                            .setEventListener(interstitialListener)
-                            .setPreload(preloadSwitch.isChecked());
-                    interstitial = new AerServInterstitial(config);
-                    if(!preloadSwitch.isChecked()) {
-                        interstitial.show();
-                    }
-                }
-            });
-
-        } else {
             final AerServConfig config = new AerServConfig(this, getPlc())
                     .setEventListener(interstitialListener)
 //                    .setDebug(true)
@@ -200,13 +158,14 @@ public class MainActivity extends Activity {
             if(!preloadSwitch.isChecked()) {
                 interstitial.show();
             }
-        }
+
     }
 
     public void showInterstitial(View view) {
         findViewById(R.id.showInterstitial).setVisibility(View.INVISIBLE);
         if (interstitial != null) {
             interstitial.show();
+            interstitial.pause();
 
         }
     }
@@ -222,6 +181,32 @@ public class MainActivity extends Activity {
         }
     }
 
+    AerServEventListener bannerListener = new AerServEventListener() {
+        @Override
+        public void onAerServEvent(AerServEvent event, List params) {
+            switch (event) {
+                case PRELOAD_READY:
+                    // Bid is available
+                    break;
+                case LOAD_TRANSACTION:
+                    // Get bid info here
+                    AerServTransactionInformation ti = (AerServTransactionInformation) params.get(0);
+                    String buyerName = ti.getBuyerName();
+                    BigDecimal buyerPrice = ti.getBuyerPrice();
+                    break;
+                case AD_LOADED:
+                    // Execute some code when AD_LOADED event occurs.
+                    break;
+                case AD_DISMISSED:
+                    // Execute some code when AD_DISMISSED event occurs.
+                    break;
+                case AD_FAILED:
+                    // Execute some code when AD_FAILED event occurs.
+                    break;
+            }
+        }
+    };
+
     public void playBanner(View view) {
         findViewById(R.id.loadBanner).setVisibility(View.INVISIBLE);
         findViewById(R.id.showBanner).setVisibility(View.INVISIBLE);
@@ -234,8 +219,15 @@ public class MainActivity extends Activity {
     }
 
     public void loadBanner(View view) {
+
+        if (banner != null) {
+            banner.kill();
+        }
+
         final Switch preloadSwitch = (Switch) findViewById(R.id.preloadSwitch);
-        final Switch a9Switch = (Switch) findViewById(R.id.a9Switch);
+        final Switch mrecSwitch = (Switch) findViewById(R.id.mrecSwitch);
+
+
 
         findViewById(R.id.loadBanner).setVisibility(View.VISIBLE);
         findViewById(R.id.showBanner).setVisibility(View.INVISIBLE);
@@ -310,69 +302,29 @@ public class MainActivity extends Activity {
                             default:
                                 msg = event.toString() + " event fired with args: " + args.toString();
                         }
-                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
                         Log.d(LOG_TAG, msg);
                     }
                 });
             }
         };
 
-        if (a9Switch.isChecked()) {
-            AdRegistration.getInstance(APP_KEY, this);
-            AdRegistration.enableLogging(true);
-            AdRegistration.enableTesting(true);
-            AdRegistration.useGeoLocation(true);
-
-            final DTBAdRequest loader = new DTBAdRequest();
-            loader.setSizes(new DTBAdSize(300, 250, SLOT_320x50));
-
-            //Send ad request to Amazon
-            loader.loadAd(new DTBAdCallback() {
-                @Override
-                public void onFailure(AdError adError) {
-                    Log.e("A9", "Failed to get banner ad from Amazon: " + adError.getMessage());
-                    final AerServConfig config = new AerServConfig(MainActivity.this, getPlc())
-                        .setAPSAdResponses(null)
-                        .setEventListener(bannerListener)
-                        .setPreload(preloadSwitch.isChecked())
-                        .setRefreshInterval(60);
-                    banner = (AerServBanner) findViewById(R.id.banner);
-                    banner.configure(config);
-                    if (!preloadSwitch.isChecked()) {
-                        banner.show();
-                    }
-                }
-
-                @Override
-                public void onSuccess(DTBAdResponse dtbAdResponse) {
-                    List<DTBAdResponse> responses = new ArrayList<DTBAdResponse>();
-                    responses.add(dtbAdResponse);
-                    Log.i("A9", "Successfully get " + dtbAdResponse.getDTBAds().size()
-                        + " banner ad from Amazon");
-
-                    final AerServConfig config = new AerServConfig(MainActivity.this, getPlc())
-                        .setAPSAdResponses(responses)
-                        .setEventListener(bannerListener)
-                        .setPreload(preloadSwitch.isChecked())
-                        .setRefreshInterval(60);
-                    banner = (AerServBanner) findViewById(R.id.banner);
-                    banner.configure(config);
-                    if (!preloadSwitch.isChecked()) {
-                        banner.show();
-                    }
-                }
-            });
-        } else {
-            final AerServConfig config = new AerServConfig(MainActivity.this, getPlc())
+        final AerServConfig config = new AerServConfig(getApplicationContext(), getPlc())
                 .setEventListener(bannerListener)
                 .setPreload(preloadSwitch.isChecked())
-                .setRefreshInterval(60);
+                .setRefreshInterval(30);
+
+        if (mrecSwitch.isChecked()){
+            banner = (AerServBanner) findViewById(R.id.mrec);
+        } else {
             banner = (AerServBanner) findViewById(R.id.banner);
-            banner.configure(config);
-            if (!preloadSwitch.isChecked()) {
-                banner.show();
-            }
+
         }
+        banner.configure(config);
+        if (!preloadSwitch.isChecked()) {
+            banner.show();
+        }
+
     }
 
     public void showBanner(View view) {

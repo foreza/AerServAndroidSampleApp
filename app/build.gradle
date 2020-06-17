@@ -45,8 +45,12 @@ repositories {
 
 dependencies {
 
-    implementation 'com.inmobi.monetization:inmobi-ads:9.0.1'
-    implementation 'com.inmobi.monetization:inmobi-mediation:9.0.1'
+//    implementation 'com.inmobi.monetization:inmobi-ads:9.0.7'
+//    implementation 'com.inmobi.monetization:inmobi-mediation:9.0.7'
+
+    implementation(name: 'InMobiSDK', ext:'aar')
+    implementation(name: 'InMobiMediationSDK', ext:'aar')
+
 
     // Allows us to handle use case when we exceed 64k method limit
     implementation 'androidx.multidex:multidex:2.0.0'
@@ -62,15 +66,18 @@ dependencies {
 
     //    implementation 'com.vungle:publisher-sdk-android:6.3.24'                            // (Version 6.3.24) Vungle SDK mediation
     //    implementation (name: 'AdColony/adcolony', ext:'jar')                               // (Version 3.3.10) AdColony SDK mediation
-    //    implementation(name: 'Facebook/AudienceNetwork-5.5', ext:'aar')                         // (Version 5.3.1) Facebook SDK mediation
-    //    implementation 'com.google.android.gms:play-services-ads:17.2.1'                    // (Version 17.2.1) AdMob SDK mediation
+//        implementation(name: 'Facebook/AudienceNetwork-5.5', ext:'aar')                         // (Version 5.3.1) Facebook SDK mediation
+        implementation 'com.google.android.gms:play-services-ads:17.2.1'                    // (Version 17.2.1) AdMob SDK mediation
+
+
+    implementation(name: 'Facebook/AudienceNetwork-5.9', ext:'aar')                         // (Version 5.9.0) Facebook SDK mediation
 
 
 
-    implementation (name: 'APS/DTBAndroidSDK-7.3', ext:'aar')                           // APS SDK mediation (not required)
-
-    implementation('com.mopub:mopub-sdk:5.5.0@aar') {
-        transitive = true
-    }
+//    implementation (name: 'APS/DTBAndroidSDK-7.3', ext:'aar')                           // APS SDK mediation (not required)
+//
+//    implementation('com.mopub:mopub-sdk:5.5.0@aar') {
+//        transitive = true
+//    }
 
 }
